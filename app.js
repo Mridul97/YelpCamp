@@ -20,7 +20,7 @@ seedDB();
 app.use(require("express-session")({
     secret : "Rusty still wins the cutest dog competition",
     resave : false,
-    saveUninitialised: false
+    saveUninitialized: false
 }));
 
 app.use(passport.initialize());
@@ -28,6 +28,11 @@ app.use(passport.session());
 passport.use(new LocalStrategy (User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
+app.use(function (req, res, next){
+    res.locals.currentUser = req.user;
+    next();
+});
 
 app.get("/" , function(req , res){
    res.render("landing"); 
@@ -132,7 +137,7 @@ app.post("/register" , function(req,res){
            return res.redirect("/register");
        }
        passport.authenticate("local")(req , res , function(){
-            res.redirect("/campgrouns"); 
+            res.redirect("/campgrounds"); 
        });
    });
 });
@@ -158,7 +163,7 @@ app.get("/logout" , function(req, res) {
 });
 
 function isLoggedIn (req, res, next){
-    if(req.isAuthentiacted()){
+    if(req.isAuthenticated()){
         return next();
     }
     res.redirect("/login");
