@@ -10,8 +10,7 @@ To see the website, go to link :- https://fierce-savannah-92006.herokuapp.com/
 2. Add a campground.
 3. Comment on a campground already present.
 4. Delete any comment added by you.
-5. Delete any campground added by you.
-6. Logout from the website.
-7. Login again.
+5. Logout from the website.
+6. Login again.
 
 
